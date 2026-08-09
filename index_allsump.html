@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allroundservice Sump — Ihr Partner für Haus &amp; Garten</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+:root{
+  --cream: #FCFBF7;
+  --cream-2: #F3F6EC;
+  --grass-light: #DDEDC4;
+  --grass: #BEDD93;
+  --grass-dark: #7DAF4B;
+  --ink: #1E1E1E;
+  --ink-soft: #4A4A4A;
+  --brown: #7C5A3A;
+  --sky: #5F9DBF;
+  --white: #ffffff;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.5;
+}
+h1,h2,h3,.brand{
+  font-family:'Caveat',cursive;
+  font-weight:700;
+}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+
+.container{
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 28px;
+}
+
+/* ---------- Roof divider (signature element) ---------- */
+.roofline{
+  width:100%;
+  height:34px;
+  display:block;
+}
+.roofline svg{width:100%;height:100%;display:block;}
+
+/* ---------- Header ---------- */
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(252,251,247,0.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(17,17,17,0.08);
+}
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 28px;
+  max-width:1080px;
+  margin:0 auto;
+}
+.brand-lockup{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:var(--ink);
+}
+.brand-lockup svg{width:34px;height:28px;}
+.brand-lockup span{font-size:1.7rem;}
+.links{
+  display:flex;
+  gap:28px;
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.links a{
+  text-decoration:none;
+  font-size:0.95rem;
+  font-weight:500;
+  color:var(--ink);
+  position:relative;
+  padding-bottom:3px;
+}
+.links a::after{
+  content:"";
+  position:absolute;
+  left:0; bottom:0;
+  width:0; height:2px;
+  background:var(--grass-dark);
+  transition:width .25s ease;
+}
+.links a:hover::after{width:100%;}
+.nav-cta{
+  background:var(--ink);
+  color:var(--cream) !important;
+  padding:9px 18px;
+  border-radius:5px;
+  font-size:0.9rem;
+  font-weight:500;
+  text-decoration:none;
+}
+.nav-cta:hover{background:var(--grass-dark);}
+.burger{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+  width:34px;
+  height:34px;
+}
+.burger span{
+  width:100%;
+  height:2px;
+  background:var(--ink);
+  border-radius:2px;
+  transition:transform .2s ease, opacity .2s ease;
+}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ---------- Hero ---------- */
+.hero{
+  background:linear-gradient(160deg, var(--cream) 0%, var(--cream-2) 55%, var(--grass-light) 100%);
+  padding:60px 0 50px;
+  overflow:hidden;
+  position:relative;
+}
+.hero-top{
+  text-align:center;
+  max-width:680px;
+  margin:0 auto 40px;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:0.8rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--grass-dark);
+  font-weight:600;
+  margin-bottom:14px;
+}
+.eyebrow::before{
+  content:"";
+  width:8px;height:8px;border-radius:50%;
+  background:var(--grass-dark);
+  display:inline-block;
+}
+.hero h1{
+  font-size:3.6rem;
+  line-height:1.08;
+  margin:0 0 18px;
+}
+.hero p.sub{
+  font-size:1.05rem;
+  color:var(--ink-soft);
+  max-width:520px;
+  margin:0 auto;
+}
+.hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+.btn{
+  display:inline-block;
+  padding:13px 26px;
+  border-radius:6px;
+  font-weight:600;
+  font-size:0.95rem;
+  text-decoration:none;
+  cursor:pointer;
+  border:none;
+  font-family:'Poppins',sans-serif;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:var(--ink); color:var(--cream);}
+.btn-primary:hover{background:var(--grass-dark);}
+.btn-outline{background:transparent; color:var(--ink); border:1.5px solid var(--ink);}
+.btn-outline:hover{border-color:var(--grass-dark); color:var(--grass-dark);}
+
+/* ---------- Section basics ---------- */
+section{padding:70px 0;}
+.section-head{max-width:600px; margin:0 auto 46px; text-align:center;}
+.section-head .eyebrow{justify-content:center; display:flex;}
+.section-head h2{font-size:2.6rem; margin:6px 0 10px;}
+.section-head p{color:var(--ink-soft); font-size:1rem; margin:0;}
+
+/* ---------- Services ---------- */
+.services{background:var(--white);}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+.service-card{
+  background:var(--cream);
+  border:1px solid rgba(17,17,17,0.06);
+  border-radius:14px;
+  padding:26px 22px;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.service-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 30px rgba(125,175,75,0.18);
+}
+.service-card .icon{
+  width:46px; height:46px;
+  border-radius:50%;
+  background:var(--grass-light);
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:16px;
+}
+.service-card .icon svg{width:22px; height:22px;}
+.service-card h3{
+  font-family:'Poppins',sans-serif;
+  font-weight:600;
+  font-size:1.05rem;
+  margin:0 0 10px;
+}
+.service-card ul{
+  margin:0; padding:0; list-style:none;
+  font-size:0.88rem; color:var(--ink-soft);
+}
+.service-card li{padding:3px 0; position:relative; padding-left:14px;}
+.service-card li::before{
+  content:"";
+  position:absolute; left:0; top:11px;
+  width:5px; height:5px; border-radius:50%;
+  background:var(--grass-dark);
+}
+
+/* ---------- Booking ---------- */
+.booking{background:var(--cream-2);}
+.booking-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:44px;
+  background:var(--white);
+  border-radius:20px;
+  padding:44px;
+  box-shadow:0 20px 60px rgba(30,30,30,0.06);
+}
+.cal-card h3, .form-card h3{
+  font-family:'Poppins',sans-serif;
+  font-weight:600;
+  font-size:1.15rem;
+  margin:0 0 18px;
+}
+.cal-header{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:14px;
+}
+.cal-header button{
+  background:var(--cream-2);
+  border:none;
+  width:32px;height:32px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ink);
+}
+.cal-header button:hover{background:var(--grass-light);}
+.cal-month{font-weight:600; font-size:1rem;}
+.cal-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+  text-align:center;
+}
+.cal-grid .dow{
+  font-size:0.72rem;
+  color:var(--ink);
+  font-weight:700;
+  padding-bottom:6px;
+}
+.cal-day{
+  aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:8px;
+  font-size:0.9rem;
+  font-weight:600;
+  cursor:pointer;
+  border:1.5px solid rgba(17,17,17,0.12);
+  background:var(--cream-2);
+  color:#111111;
+  position:relative;
+}
+.cal-day.empty{visibility:hidden; cursor:default; border-color:transparent;}
+.cal-day.disabled{
+  color:#b7b7b7;
+  cursor:not-allowed;
+  background:transparent;
+  border-color:rgba(17,17,17,0.06);
+}
+.cal-day:not(.disabled):not(.empty):hover{border-color:var(--grass-dark); background:var(--grass-light);}
+.cal-day.selected{
+  background:var(--grass-dark);
+  color:var(--white);
+  font-weight:700;
+  border-color:var(--grass-dark);
+}
+.cal-day.today:not(.selected)::after{
+  content:"";
+  position:absolute; bottom:4px; left:50%;
+  transform:translateX(-50%);
+  width:4px; height:4px; border-radius:50%;
+  background:var(--sky);
+}
+
+.slots{
+  display:flex; flex-wrap:wrap; gap:10px;
+  margin-top:18px;
+}
+.slot{
+  padding:8px 14px;
+  border-radius:7px;
+  border:1.5px solid rgba(17,17,17,0.15);
+  background:var(--cream);
+  font-size:0.85rem;
+  cursor:pointer;
+  color:var(--ink);
+}
+.slot:hover{border-color:var(--grass-dark);}
+.slot.selected{
+  background:var(--ink);
+  color:var(--white);
+  border-color:var(--ink);
+}
+.slot.disabled{
+  opacity:0.35;
+  cursor:not-allowed;
+}
+
+.form-card label{
+  display:block;
+  font-size:0.82rem;
+  font-weight:600;
+  margin:14px 0 6px;
+}
+.form-card label:first-of-type{margin-top:0;}
+.form-card input, .form-card textarea{
+  width:100%;
+  padding:11px 13px;
+  border-radius:7px;
+  border:1.5px solid rgba(17,17,17,0.15);
+  font-family:'Poppins',sans-serif;
+  font-size:0.92rem;
+  background:var(--cream);
+  color:var(--ink);
+}
+.form-card input:focus, .form-card textarea:focus{
+  outline:none;
+  border-color:var(--grass-dark);
+}
+.form-card textarea{resize:vertical; min-height:80px;}
+
+.selected-summary{
+  margin-top:16px;
+  font-size:0.85rem;
+  color:var(--ink-soft);
+  background:var(--cream-2);
+  border-radius:8px;
+  padding:10px 13px;
+  min-height:20px;
+}
+.selected-summary strong{color:var(--ink);}
+
+.submit-row{margin-top:20px;}
+.submit-row .btn{width:100%; text-align:center;}
+.form-note{
+  font-size:0.76rem;
+  color:var(--ink-soft);
+  margin-top:10px;
+  line-height:1.5;
+}
+.form-msg{
+  margin-top:12px;
+  font-size:0.85rem;
+  padding:10px 13px;
+  border-radius:8px;
+  display:none;
+}
+.form-msg.show{display:block;}
+.form-msg.ok{background:var(--grass-light); color:#2c4a17;}
+.form-msg.err{background:#fbe4e4; color:#8a2323;}
+
+/* ---------- Footer ---------- */
+footer{
+  background:var(--grass);
+  padding:50px 0 30px;
+  position:relative;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.2fr 1fr 1fr;
+  gap:30px;
+}
+.footer-grid h4{
+  font-family:'Poppins',sans-serif;
+  font-size:0.95rem;
+  font-weight:600;
+  margin:0 0 12px;
+}
+.footer-grid p, .footer-grid a{
+  font-size:0.88rem;
+  color:#2c3d1a;
+  text-decoration:none;
+  line-height:1.8;
+}
+.footer-brand{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+.footer-brand svg{width:30px;height:26px;}
+.footer-brand span{font-family:'Caveat',cursive; font-weight:700; font-size:1.5rem; color:var(--ink);}
+.footer-bottom{
+  text-align:center;
+  font-size:0.78rem;
+  color:#3c4d2a;
+  margin-top:34px;
+  padding-top:18px;
+  border-top:1px solid rgba(0,0,0,0.08);
+}
+
+@media (max-width: 860px){
+  .nav{position:relative;}
+  .hero h1{font-size:2.6rem;}
+  .service-grid{grid-template-columns:1fr 1fr;}
+  .booking-wrap{grid-template-columns:1fr; padding:26px;}
+  .footer-grid{grid-template-columns:1fr;}
+  .burger{display:flex;}
+  .links{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0; right:0;
+    flex-direction:column;
+    gap:0;
+    background:var(--cream);
+    padding:6px 28px 12px;
+    border-bottom:1px solid rgba(17,17,17,0.1);
+    box-shadow:0 16px 24px rgba(0,0,0,0.08);
+  }
+  .links.open{display:flex;}
+  .links li{width:100%;}
+  .links a{display:block; padding:13px 0; border-bottom:1px solid rgba(17,17,17,0.07);}
+  .links a::after{display:none;}
+}
+
+@media (max-width: 600px){
+  .container{padding:0 18px;}
+  .nav{padding:12px 18px;}
+  .brand-lockup span{font-size:1.4rem;}
+  .nav-cta{padding:8px 14px; font-size:0.82rem;}
+  .hero{padding:44px 0 34px;}
+  .hero h1{font-size:2.1rem;}
+  .hero p.sub{font-size:0.95rem;}
+  .eyebrow{font-size:0.72rem;}
+  section{padding:50px 0;}
+  .section-head h2{font-size:2rem;}
+  .service-grid{grid-template-columns:1fr;}
+  .booking-wrap{padding:18px; border-radius:14px; gap:28px;}
+  .cal-day{font-size:0.8rem;}
+  .cal-grid{gap:4px;}
+  .slots{gap:8px;}
+  .slot{padding:7px 11px; font-size:0.8rem;}
+  .form-card input, .form-card textarea{font-size:16px;}
+  .footer-brand span{font-size:1.3rem;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; scroll-behavior:auto !important;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="brand-lockup">
+      <svg viewBox="0 0 40 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 18 L20 3 L38 18" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="1" y1="18.5" x2="39" y2="18.5" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+        <rect x="15" y="8" width="10" height="10" stroke="#111111" stroke-width="1.6" fill="none"/>
+      </svg>
+      <span class="brand">Allroundservice Sump</span>
+    </a>
+    <ul class="links" id="navLinks">
+      <li><a href="#termin">Termin buchen</a></li>
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <button class="burger" id="burgerBtn" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="#termin" class="nav-cta">Termin anfragen</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-top">
+        <span class="eyebrow">Haus &amp; Garten aus einer Hand</span>
+        <h1>Ihr Partner für Haus &amp; Garten</h1>
+        <p class="sub">Von der Rasenpflege über den Winterdienst bis zu kleinen Arbeiten rund ums Haus — zuverlässig, gründlich und pünktlich. Wählen Sie direkt unten Ihren Wunschtermin.</p>
+      </div>
+
+      <div class="booking-wrap" id="termin">
+        <div class="cal-card">
+          <h3>1. Datum &amp; Uhrzeit wählen</h3>
+          <div class="cal-header">
+            <button id="prevMonth" aria-label="Vorheriger Monat">‹</button>
+            <div class="cal-month" id="calMonthLabel"></div>
+            <button id="nextMonth" aria-label="Nächster Monat">›</button>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+
+          <div id="slotsWrap">
+            <p style="font-size:0.85rem; font-weight:600; margin:20px 0 0;">Uhrzeit</p>
+            <div class="slots" id="slots">
+              <div class="slot" data-time="08:00">08:00</div>
+              <div class="slot" data-time="10:00">10:00</div>
+              <div class="slot" data-time="13:00">13:00</div>
+              <div class="slot" data-time="15:00">15:00</div>
+            </div>
+          </div>
+
+          <div class="selected-summary" id="selectedSummary">Noch kein Termin ausgewählt.</div>
+        </div>
+
+        <div class="form-card">
+          <h3>2. Ihre Kontaktdaten</h3>
+          <form id="bookingForm">
+            <label for="name">Name</label>
+            <input type="text" id="name" required placeholder="Vor- und Nachname">
+
+            <label for="phone">Telefon</label>
+            <input type="tel" id="phone" required placeholder="Ihre Telefonnummer">
+
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" required placeholder="ihre@email.de">
+
+            <label for="address">Adresse / Einsatzort</label>
+            <input type="text" id="address" placeholder="Straße, PLZ, Ort">
+
+            <label for="message">Nachricht (optional)</label>
+            <textarea id="message" placeholder="Was möchten Sie erledigt haben?"></textarea>
+
+            <div class="submit-row">
+              <button type="submit" class="btn btn-primary">Terminanfrage senden</button>
+            </div>
+            <div class="form-msg" id="formMsg"></div>
+            <p class="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit einer vorausgefüllten Terminanfrage an uns. Bitte prüfen Sie die Angaben kurz und senden Sie die E-Mail ab — wir melden uns anschließend mit einer Terminbestätigung bei Ihnen.</p>
+          </form>
+        </div>
+      </div>
+
+      <div class="hero-actions" style="justify-content:center; margin-top:10px;">
+        <a href="#leistungen" class="btn btn-outline">Leistungen ansehen</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="roofline" aria-hidden="true">
+    <svg viewBox="0 0 1080 34" preserveAspectRatio="none">
+      <path d="M0 34 L60 6 L120 34 L180 6 L240 34 L300 6 L360 34 L420 6 L480 34 L540 6 L600 34 L660 6 L720 34 L780 6 L840 34 L900 6 L960 34 L1020 6 L1080 34" fill="none" stroke="rgba(17,17,17,0.12)" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="leistungen">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Unser Angebot</span>
+        <h2>Leistungen im Überblick</h2>
+        <p>Vier Bereiche, ein Ansprechpartner — planbar und ohne Aufwand für Sie.</p>
+      </div>
+      <div class="service-grid">
+
+        <div class="service-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 21c-6 0-9-5-8.4-11 4.8-1.2 6.6 1.6 7.2 4C11.4 10 12 6 8 3c7 0 11 4 11 10 0 4-3 8-7 8Z" stroke="#7DAF4B" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Garten &amp; Außenanlagen</h3>
+          <ul>
+            <li>Rasenmähen &amp; Rasenpflege</li>
+            <li>Hecken- &amp; Strauchschnitt</li>
+            <li>Unkraut entfernen</li>
+            <li>Laub- &amp; Grünschnittentsorgung</li>
+            <li>Beetpflege &amp; Bepflanzung</li>
+            <li>Vertikutieren</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2v20M4 7l16 10M20 7L4 17" stroke="#5F9DBF" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Winterdienst</h3>
+          <ul>
+            <li>Schneeräumung</li>
+            <li>Streudienst</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2c3 4 6 7.4 6 11a6 6 0 1 1-12 0c0-3.6 3-7 6-11Z" stroke="#5F9DBF" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Reinigungsarbeiten</h3>
+          <ul>
+            <li>Hausflur- &amp; Treppenhausreinigung</li>
+            <li>Fensterreinigung</li>
+            <li>Fassadenreinigung</li>
+            <li>Terrassen- &amp; Gehwegreinigung</li>
+            <li>Dachrinnenreinigung</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M3 11 12 3l9 8M5 10v10h14V10" stroke="#B08252" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Rund ums Haus</h3>
+          <ul>
+            <li>Malerarbeiten (Wände, Zäune, Fassaden)</li>
+            <li>Möbelmontage</li>
+            <li>Mülltonnenservice</li>
+            <li>Entrümpelung &amp; Kleintransporte</li>
+            <li>Objekt- &amp; Leerstandskontrolle</li>
+            <li>Markisen &amp; Rollläden</li>
+            <li>Terrassenmöbel ein-/auslagern</li>
+            <li>Weihnachtsbeleuchtung anbringen</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="kontakt">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 40 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 18 L20 3 L38 18" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="1" y1="18.5" x2="39" y2="18.5" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
+            <rect x="15" y="8" width="10" height="10" stroke="#111111" stroke-width="1.6" fill="none"/>
+          </svg>
+          <span>Allroundservice Sump</span>
+        </div>
+        <p>Ihr Partner für Haus &amp; Garten. Zuverlässig, gründlich, aus einer Hand.</p>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <p>Telefon: 0000 / 000 000<br>
+        E-Mail: info@allroundservice-sump.de<br>
+        Musterstraße 1, 00000 Musterstadt</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <p><a href="#termin">Termin buchen</a><br>
+        <a href="#leistungen">Leistungen</a><br>
+        <a href="#kontakt">Kontakt</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> Allroundservice Sump — Alle Rechte vorbehalten.</div>
+  </div>
+</footer>
+
+<script>
+// ---------- Config ----------
+// TODO: Hier die Web-App-URL deines Google Apps Script eintragen (siehe Anleitung).
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyCLmGsDeBOattvyJC4wh6KFtmxiCxDL7bJbTZIXaBchI1x5Mq265kDC2T29xp8XaD1-Q/exec";
+
+const WEEKDAYS = ["Mo","Di","Mi","Do","Fr","Sa","So"];
+const MONTHS = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+const ALL_TIMES = ["08:00","10:00","13:00","15:00"];
+
+let today = new Date();
+today.setHours(0,0,0,0);
+let viewYear = today.getFullYear();
+let viewMonth = today.getMonth();
+let selectedDate = null; // Date object
+let selectedTime = null; // string
+let busySlots = new Set(); // Set of "YYYY-MM-DD|HH:MM" strings, vom Server geladen
+
+const calGrid = document.getElementById('calGrid');
+const calMonthLabel = document.getElementById('calMonthLabel');
+const selectedSummary = document.getElementById('selectedSummary');
+
+function isSunday(d){ return d.getDay() === 0; }
+
+function toISODate(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+function isDateFullyBooked(dateObj){
+  const iso = toISODate(dateObj);
+  return ALL_TIMES.every(t => busySlots.has(`${iso}|${t}`));
+}
+
+// ---------- Belegte Termine vom Server laden ----------
+async function loadBusySlots(){
+  try{
+    const res = await fetch(`${SCRIPT_URL}?action=busy`);
+    const data = await res.json();
+    busySlots = new Set(data.busy || []);
+  }catch(err){
+    console.warn("Konnte belegte Termine nicht laden:", err);
+  }
+  renderCalendar();
+  updateSlots();
+}
+
+function renderCalendar(){
+  calGrid.innerHTML = "";
+  calMonthLabel.textContent = `${MONTHS[viewMonth]} ${viewYear}`;
+
+  WEEKDAYS.forEach(d=>{
+    const el = document.createElement('div');
+    el.className = 'dow';
+    el.textContent = d;
+    calGrid.appendChild(el);
+  });
+
+  const firstOfMonth = new Date(viewYear, viewMonth, 1);
+  let startOffset = firstOfMonth.getDay() - 1; // Monday = 0
+  if (startOffset < 0) startOffset = 6;
+
+  for(let i=0;i<startOffset;i++){
+    const empty = document.createElement('div');
+    empty.className = 'cal-day empty';
+    calGrid.appendChild(empty);
+  }
+
+  const daysInMonth = new Date(viewYear, viewMonth+1, 0).getDate();
+  for(let day=1; day<=daysInMonth; day++){
+    const dateObj = new Date(viewYear, viewMonth, day);
+    const btn = document.createElement('div');
+    btn.className = 'cal-day';
+    btn.textContent = day;
+
+    const isPast = dateObj < today;
+    const fullyBooked = isDateFullyBooked(dateObj);
+    const disabled = isPast || isSunday(dateObj) || fullyBooked;
+
+    if(disabled){ btn.classList.add('disabled'); }
+    if(dateObj.getTime() === today.getTime()){ btn.classList.add('today'); }
+    if(selectedDate && dateObj.getTime() === selectedDate.getTime()){ btn.classList.add('selected'); }
+
+    if(!disabled){
+      btn.addEventListener('click', ()=>{
+        selectedDate = dateObj;
+        selectedTime = null;
+        renderCalendar();
+        updateSlots();
+        updateSummary();
+      });
+    }
+    calGrid.appendChild(btn);
+  }
+}
+
+document.getElementById('prevMonth').addEventListener('click', ()=>{
+  viewMonth--;
+  if(viewMonth<0){ viewMonth=11; viewYear--; }
+  renderCalendar();
+});
+document.getElementById('nextMonth').addEventListener('click', ()=>{
+  viewMonth++;
+  if(viewMonth>11){ viewMonth=0; viewYear++; }
+  renderCalendar();
+});
+
+const slotEls = document.querySelectorAll('.slot');
+function updateSlots(){
+  slotEls.forEach(s=>{
+    s.classList.remove('selected');
+    s.classList.remove('disabled');
+    const time = s.getAttribute('data-time');
+    const isBusy = selectedDate && busySlots.has(`${toISODate(selectedDate)}|${time}`);
+    if(!selectedDate || isBusy){ s.classList.add('disabled'); }
+  });
+}
+slotEls.forEach(s=>{
+  s.addEventListener('click', ()=>{
+    if(!selectedDate || s.classList.contains('disabled')) return;
+    selectedTime = s.getAttribute('data-time');
+    slotEls.forEach(x=>x.classList.remove('selected'));
+    s.classList.add('selected');
+    updateSummary();
+  });
+});
+
+function formatDate(d){
+  return d.toLocaleDateString('de-DE', { weekday:'long', day:'2-digit', month:'2-digit', year:'numeric' });
+}
+
+function updateSummary(){
+  if(selectedDate && selectedTime){
+    selectedSummary.innerHTML = `Gewählter Termin: <strong>${formatDate(selectedDate)}, ${selectedTime} Uhr</strong>`;
+  } else if(selectedDate){
+    selectedSummary.innerHTML = `Datum gewählt: <strong>${formatDate(selectedDate)}</strong> — bitte noch eine Uhrzeit wählen.`;
+  } else {
+    selectedSummary.textContent = "Noch kein Termin ausgewählt.";
+  }
+}
+
+renderCalendar();
+updateSlots();
+loadBusySlots();
+
+// ---------- Form submit ----------
+const form = document.getElementById('bookingForm');
+const formMsg = document.getElementById('formMsg');
+const submitBtn = form.querySelector('button[type="submit"]');
+
+form.addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  formMsg.classList.remove('show','ok','err');
+
+  if(!selectedDate || !selectedTime){
+    formMsg.textContent = "Bitte wählen Sie zuerst ein Datum und eine Uhrzeit aus.";
+    formMsg.classList.add('show','err');
+    return;
+  }
+  if(!name || !phone || !email){
+    formMsg.textContent = "Bitte füllen Sie Name, Telefon und E-Mail aus.";
+    formMsg.classList.add('show','err');
+    return;
+  }
+
+  const payload = {
+    name, phone, email, address, message,
+    date: toISODate(selectedDate),
+    dateLabel: formatDate(selectedDate),
+    time: selectedTime
+  };
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Wird gesendet …";
+
+  try{
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" }, // vermeidet CORS-Preflight bei Apps Script
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    if(data.ok){
+      formMsg.textContent = "Ihre Terminanfrage wurde verschickt! Sie erhalten eine Bestätigung per E-Mail, sobald wir den Termin final bestätigt haben.";
+      formMsg.classList.add('show','ok');
+      form.reset();
+      selectedDate = null;
+      selectedTime = null;
+      updateSummary();
+      renderCalendar();
+      updateSlots();
+      loadBusySlots();
+    } else {
+      throw new Error(data.error || "Unbekannter Fehler");
+    }
+  }catch(err){
+    console.error(err);
+    formMsg.textContent = "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es später erneut oder rufen Sie uns direkt an.";
+    formMsg.classList.add('show','err');
+  }finally{
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Terminanfrage senden";
+  }
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ---------- Mobile burger menu ----------
+const burgerBtn = document.getElementById('burgerBtn');
+const navLinks = document.getElementById('navLinks');
+
+burgerBtn.addEventListener('click', ()=>{
+  const isOpen = navLinks.classList.toggle('open');
+  burgerBtn.classList.toggle('open', isOpen);
+  burgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+
+navLinks.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    navLinks.classList.remove('open');
+    burgerBtn.classList.remove('open');
+    burgerBtn.setAttribute('aria-expanded','false');
+  });
+});
+</script>
+
+</body>
+</html>
