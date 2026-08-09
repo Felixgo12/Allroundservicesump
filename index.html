@@ -110,7 +110,28 @@ header{
   text-decoration:none;
 }
 .nav-cta:hover{background:var(--grass-dark);}
-.burger{display:none;}
+.burger{
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+  width:34px;
+  height:34px;
+}
+.burger span{
+  width:100%;
+  height:2px;
+  background:var(--ink);
+  border-radius:2px;
+  transition:transform .2s ease, opacity .2s ease;
+}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
 /* ---------- Hero ---------- */
 .hero{
@@ -414,11 +435,49 @@ footer{
 }
 
 @media (max-width: 860px){
-  .hero h1{font-size:2.4rem;}
+  .nav{position:relative;}
+  .hero h1{font-size:2.6rem;}
   .service-grid{grid-template-columns:1fr 1fr;}
   .booking-wrap{grid-template-columns:1fr; padding:26px;}
   .footer-grid{grid-template-columns:1fr;}
-  .links{display:none;}
+  .burger{display:flex;}
+  .links{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0; right:0;
+    flex-direction:column;
+    gap:0;
+    background:var(--cream);
+    padding:6px 28px 12px;
+    border-bottom:1px solid rgba(17,17,17,0.1);
+    box-shadow:0 16px 24px rgba(0,0,0,0.08);
+  }
+  .links.open{display:flex;}
+  .links li{width:100%;}
+  .links a{display:block; padding:13px 0; border-bottom:1px solid rgba(17,17,17,0.07);}
+  .links a::after{display:none;}
+}
+
+@media (max-width: 600px){
+  .container{padding:0 18px;}
+  .nav{padding:12px 18px;}
+  .brand-lockup span{font-size:1.4rem;}
+  .nav-cta{padding:8px 14px; font-size:0.82rem;}
+  .hero{padding:44px 0 34px;}
+  .hero h1{font-size:2.1rem;}
+  .hero p.sub{font-size:0.95rem;}
+  .eyebrow{font-size:0.72rem;}
+  section{padding:50px 0;}
+  .section-head h2{font-size:2rem;}
+  .service-grid{grid-template-columns:1fr;}
+  .booking-wrap{padding:18px; border-radius:14px; gap:28px;}
+  .cal-day{font-size:0.8rem;}
+  .cal-grid{gap:4px;}
+  .slots{gap:8px;}
+  .slot{padding:7px 11px; font-size:0.8rem;}
+  .form-card input, .form-card textarea{font-size:16px;}
+  .footer-brand span{font-size:1.3rem;}
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -438,11 +497,14 @@ footer{
       </svg>
       <span class="brand">Allroundservice Sump</span>
     </a>
-    <ul class="links">
+    <ul class="links" id="navLinks">
       <li><a href="#termin">Termin buchen</a></li>
       <li><a href="#leistungen">Leistungen</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
+    <button class="burger" id="burgerBtn" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <a href="#termin" class="nav-cta">Termin anfragen</a>
   </div>
 </header>
@@ -626,9 +688,12 @@ footer{
 
 <script>
 // ---------- Config ----------
-const BUSINESS_EMAIL = "info@allroundservice-sump.de"; // TODO: durch echte Adresse ersetzen
+// TODO: Hier die Web-App-URL deines Google Apps Script eintragen (siehe Anleitung).
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyCLmGsDeBOattvyJC4wh6KFtmxiCxDL7bJbTZIXaBchI1x5Mq265kDC2T29xp8XaD1-Q/exec";
+
 const WEEKDAYS = ["Mo","Di","Mi","Do","Fr","Sa","So"];
 const MONTHS = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+const ALL_TIMES = ["08:00","10:00","13:00","15:00"];
 
 let today = new Date();
 today.setHours(0,0,0,0);
@@ -636,12 +701,38 @@ let viewYear = today.getFullYear();
 let viewMonth = today.getMonth();
 let selectedDate = null; // Date object
 let selectedTime = null; // string
+let busySlots = new Set(); // Set of "YYYY-MM-DD|HH:MM" strings, vom Server geladen
 
 const calGrid = document.getElementById('calGrid');
 const calMonthLabel = document.getElementById('calMonthLabel');
 const selectedSummary = document.getElementById('selectedSummary');
 
 function isSunday(d){ return d.getDay() === 0; }
+
+function toISODate(d){
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+function isDateFullyBooked(dateObj){
+  const iso = toISODate(dateObj);
+  return ALL_TIMES.every(t => busySlots.has(`${iso}|${t}`));
+}
+
+// ---------- Belegte Termine vom Server laden ----------
+async function loadBusySlots(){
+  try{
+    const res = await fetch(`${SCRIPT_URL}?action=busy`);
+    const data = await res.json();
+    busySlots = new Set(data.busy || []);
+  }catch(err){
+    console.warn("Konnte belegte Termine nicht laden:", err);
+  }
+  renderCalendar();
+  updateSlots();
+}
 
 function renderCalendar(){
   calGrid.innerHTML = "";
@@ -672,7 +763,8 @@ function renderCalendar(){
     btn.textContent = day;
 
     const isPast = dateObj < today;
-    const disabled = isPast || isSunday(dateObj);
+    const fullyBooked = isDateFullyBooked(dateObj);
+    const disabled = isPast || isSunday(dateObj) || fullyBooked;
 
     if(disabled){ btn.classList.add('disabled'); }
     if(dateObj.getTime() === today.getTime()){ btn.classList.add('today'); }
@@ -707,12 +799,14 @@ function updateSlots(){
   slotEls.forEach(s=>{
     s.classList.remove('selected');
     s.classList.remove('disabled');
-    if(!selectedDate){ s.classList.add('disabled'); }
+    const time = s.getAttribute('data-time');
+    const isBusy = selectedDate && busySlots.has(`${toISODate(selectedDate)}|${time}`);
+    if(!selectedDate || isBusy){ s.classList.add('disabled'); }
   });
 }
 slotEls.forEach(s=>{
   s.addEventListener('click', ()=>{
-    if(!selectedDate) return;
+    if(!selectedDate || s.classList.contains('disabled')) return;
     selectedTime = s.getAttribute('data-time');
     slotEls.forEach(x=>x.classList.remove('selected'));
     s.classList.add('selected');
@@ -736,12 +830,14 @@ function updateSummary(){
 
 renderCalendar();
 updateSlots();
+loadBusySlots();
 
 // ---------- Form submit ----------
 const form = document.getElementById('bookingForm');
 const formMsg = document.getElementById('formMsg');
+const submitBtn = form.querySelector('button[type="submit"]');
 
-form.addEventListener('submit', function(e){
+form.addEventListener('submit', async function(e){
   e.preventDefault();
 
   const name = document.getElementById('name').value.trim();
@@ -763,28 +859,66 @@ form.addEventListener('submit', function(e){
     return;
   }
 
-  const subject = `Terminanfrage: ${formatDate(selectedDate)}, ${selectedTime} Uhr`;
-  const body =
-`Neue Terminanfrage über die Website
+  const payload = {
+    name, phone, email, address, message,
+    date: toISODate(selectedDate),
+    dateLabel: formatDate(selectedDate),
+    time: selectedTime
+  };
 
-Name: ${name}
-Telefon: ${phone}
-E-Mail: ${email}
-Adresse/Einsatzort: ${address || "-"}
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Wird gesendet …";
 
-Gewünschter Termin: ${formatDate(selectedDate)}, ${selectedTime} Uhr
+  try{
+    const res = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" }, // vermeidet CORS-Preflight bei Apps Script
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
 
-Nachricht:
-${message || "-"}`;
-
-  const mailtoLink = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailtoLink;
-
-  formMsg.textContent = "Ihr E-Mail-Programm öffnet sich mit der vorausgefüllten Anfrage. Bitte senden Sie die E-Mail ab, damit wir Ihren Termin bestätigen können.";
-  formMsg.classList.add('show','ok');
+    if(data.ok){
+      formMsg.textContent = "Ihre Terminanfrage wurde verschickt! Sie erhalten eine Bestätigung per E-Mail, sobald wir den Termin final bestätigt haben.";
+      formMsg.classList.add('show','ok');
+      form.reset();
+      selectedDate = null;
+      selectedTime = null;
+      updateSummary();
+      renderCalendar();
+      updateSlots();
+      loadBusySlots();
+    } else {
+      throw new Error(data.error || "Unbekannter Fehler");
+    }
+  }catch(err){
+    console.error(err);
+    formMsg.textContent = "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es später erneut oder rufen Sie uns direkt an.";
+    formMsg.classList.add('show','err');
+  }finally{
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Terminanfrage senden";
+  }
 });
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// ---------- Mobile burger menu ----------
+const burgerBtn = document.getElementById('burgerBtn');
+const navLinks = document.getElementById('navLinks');
+
+burgerBtn.addEventListener('click', ()=>{
+  const isOpen = navLinks.classList.toggle('open');
+  burgerBtn.classList.toggle('open', isOpen);
+  burgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+
+navLinks.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click', ()=>{
+    navLinks.classList.remove('open');
+    burgerBtn.classList.remove('open');
+    burgerBtn.setAttribute('aria-expanded','false');
+  });
+});
 </script>
 
 </body>
