@@ -66,7 +66,7 @@ header{
   display:flex; align-items:center; gap:10px;
   text-decoration:none; color:var(--ink);
 }
-.brand-lockup svg{width:34px;height:28px;}
+.brand-lockup svg{width:150px;height:79px;}
 .brand-lockup span{font-size:1.7rem;}
 .links{
   display:flex; gap:28px; list-style:none; margin:0; padding:0;
@@ -195,7 +195,7 @@ footer{background:var(--grass); padding:50px 0 30px; position:relative;}
 .footer-grid h4{font-family:'Poppins',sans-serif; font-size:0.95rem; font-weight:600; margin:0 0 12px;}
 .footer-grid p, .footer-grid a{font-size:0.88rem; color:#2c3d1a; text-decoration:none; line-height:1.8;}
 .footer-brand{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
-.footer-brand svg{width:30px;height:26px;}
+.footer-brand svg{width:160px;height:84px;}
 .footer-brand span{font-family:'Caveat',cursive; font-weight:700; font-size:1.5rem; color:var(--ink);}
 .footer-bottom{
   text-align:center; font-size:0.78rem; color:#3c4d2a;
@@ -225,6 +225,7 @@ footer{background:var(--grass); padding:50px 0 30px; position:relative;}
   .container{padding:0 18px;}
   .nav{padding:12px 18px;}
   .brand-lockup span{font-size:1.4rem;}
+  .brand-lockup svg{width:115px; height:60px;}
   .nav-cta{padding:8px 14px; font-size:0.82rem;}
   .hero{padding:44px 0 34px;}
   .hero h1{font-size:2.1rem;}
@@ -248,12 +249,19 @@ footer{background:var(--grass); padding:50px 0 30px; position:relative;}
 <header>
   <div class="nav">
     <a href="#top" class="brand-lockup">
-      <svg viewBox="0 0 40 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 18 L20 3 L38 18" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="1" y1="18.5" x2="39" y2="18.5" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
-        <rect x="15" y="8" width="10" height="10" stroke="#111111" stroke-width="1.6" fill="none"/>
+      <svg viewBox="0 0 400 210" width="150" height="79" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 140 88 L 200 37 L 260 88" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="135" y1="89.5" x2="265" y2="89.5" stroke="#111111" stroke-width="5" stroke-linecap="round"/>
+        <rect x="186" y="56" width="28" height="28" fill="none" stroke="#111111" stroke-width="3"/>
+        <line x1="200" y1="56" x2="200" y2="84" stroke="#111111" stroke-width="2"/>
+        <line x1="186" y1="70" x2="214" y2="70" stroke="#111111" stroke-width="2"/>
+        <g font-family="Caveat" fill="#111111">
+          <text x="18" y="145" font-size="31" font-weight="700">Allround</text>
+          <text x="112" y="157" font-size="76" font-weight="700">S</text>
+          <text x="152" y="145" font-size="31" font-weight="700">ervice</text>
+          <text x="145" y="173" font-size="31" font-weight="700">ump</text>
+        </g>
       </svg>
-      <span class="brand">Allroundservice Sump</span>
     </a>
     <ul class="links" id="navLinks">
       <li><a href="#leistungen">Leistungen</a></li>
@@ -281,18 +289,37 @@ footer{background:var(--grass); padding:50px 0 30px; position:relative;}
         </div>
       </div>
       <div class="hero-art">
-        <svg viewBox="0 0 300 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 230 L20 205 Q60 197 110 202 Q160 208 210 198 Q250 191 280 200 L280 230 Z" fill="#CDE6A8"/>
-          <path d="M20 230 L20 213 Q62 207 112 211 Q158 216 208 208 Q248 202 280 210 L280 230 Z" fill="#BEDD93"/>
-          <rect x="252" y="150" width="4.5" height="26" rx="1.5" fill="#7C5A3A"/>
-          <circle cx="254.2" cy="136" r="15" fill="#8FC25C"/>
-          <circle cx="243" cy="146" r="10.5" fill="#9CCE6B"/>
-          <circle cx="266" cy="146" r="10.5" fill="#9CCE6B"/>
-          <path d="M60 150 L120 95 L180 150" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="55" y1="151" x2="185" y2="151" stroke="#111111" stroke-width="5" stroke-linecap="round"/>
-          <rect x="103" y="110" width="34" height="34" fill="none" stroke="#111111" stroke-width="3"/>
-          <line x1="120" y1="110" x2="120" y2="144" stroke="#111111" stroke-width="2"/>
-          <line x1="103" y1="127" x2="137" y2="127" stroke="#111111" stroke-width="2"/>
+        <svg viewBox="0 0 700 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Rasenfläche -->
+          <path d="M 0 400 L 0 355 Q 120 335 260 350 Q 400 365 520 345 Q 620 330 700 345 L 700 400 Z" fill="#CDE6A8"/>
+          <path d="M 0 400 L 0 368 Q 130 352 270 364 Q 410 377 530 360 Q 630 347 700 360 L 700 400 Z" fill="#BEDD93"/>
+
+          <!-- kleiner Baum -->
+          <rect x="612" y="270" width="10" height="55" rx="3" fill="#7C5A3A"/>
+          <circle cx="617" cy="245" r="34" fill="#8FC25C"/>
+          <circle cx="595" cy="262" r="24" fill="#9CCE6B"/>
+          <circle cx="640" cy="262" r="24" fill="#9CCE6B"/>
+
+          <!-- Dach -->
+          <path d="M 245 150 L 350 65 L 455 150" fill="none" stroke="#111111" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="237" y1="152" x2="463" y2="152" stroke="#111111" stroke-width="6" stroke-linecap="round"/>
+
+          <!-- Fenster -->
+          <rect x="326" y="98" width="48" height="48" fill="none" stroke="#111111" stroke-width="4"/>
+          <line x1="350" y1="98" x2="350" y2="146" stroke="#111111" stroke-width="3"/>
+          <line x1="326" y1="122" x2="374" y2="122" stroke="#111111" stroke-width="3"/>
+
+          <!-- Schriftzug -->
+          <g font-family="Caveat" fill="#111111">
+            <text x="140" y="242" font-size="52" font-weight="700">Allround</text>
+            <text x="300" y="262" font-size="130" font-weight="700">S</text>
+            <text x="370" y="242" font-size="52" font-weight="700">ervice</text>
+            <text x="355" y="288" font-size="52" font-weight="700">ump</text>
+          </g>
+
+          <!-- Slogan -->
+          <line x1="160" y1="327" x2="480" y2="327" stroke="#111111" stroke-width="1.5" opacity="0.5"/>
+          <text x="320" y="355" text-anchor="middle" font-family="Poppins" font-style="italic" font-size="19" fill="#111111">Ihr Partner für Haus &amp; Garten</text>
         </svg>
       </div>
     </div>
@@ -404,12 +431,19 @@ footer{background:var(--grass); padding:50px 0 30px; position:relative;}
     <div class="footer-grid">
       <div>
         <div class="footer-brand">
-          <svg viewBox="0 0 40 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 18 L20 3 L38 18" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            <line x1="1" y1="18.5" x2="39" y2="18.5" stroke="#111111" stroke-width="3" stroke-linecap="round"/>
-            <rect x="15" y="8" width="10" height="10" stroke="#111111" stroke-width="1.6" fill="none"/>
+          <svg viewBox="0 0 400 210" width="160" height="84" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 140 88 L 200 37 L 260 88" fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="135" y1="89.5" x2="265" y2="89.5" stroke="#111111" stroke-width="5" stroke-linecap="round"/>
+            <rect x="186" y="56" width="28" height="28" fill="none" stroke="#111111" stroke-width="3"/>
+            <line x1="200" y1="56" x2="200" y2="84" stroke="#111111" stroke-width="2"/>
+            <line x1="186" y1="70" x2="214" y2="70" stroke="#111111" stroke-width="2"/>
+            <g font-family="Caveat" fill="#111111">
+              <text x="18" y="145" font-size="31" font-weight="700">Allround</text>
+              <text x="112" y="157" font-size="76" font-weight="700">S</text>
+              <text x="152" y="145" font-size="31" font-weight="700">ervice</text>
+              <text x="145" y="173" font-size="31" font-weight="700">ump</text>
+            </g>
           </svg>
-          <span>Allroundservice Sump</span>
         </div>
         <p>Ihr Partner für Haus &amp; Garten. Zuverlässig, gründlich, aus einer Hand.</p>
       </div>
